@@ -3,10 +3,18 @@ import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-onlyfiles = [f for f in listdir(r"C:\Users\tony\Desktop\gun_dataset\img_rev") if isfile(join(r"C:\Users\tony\Desktop\gun_dataset\img_rev", f))]
+if len(sys.argv)!=2:
+    print("Usage: python checkmaxsize.py path_extension")
+    exit()
+
+adjsourcestring = sys.argv[1].split("_")[0]+"_adj"+sys.argv[1].split("_")[1]
+source = sorted(Path(Path.cwd()/sys.argv[1]).glob('*'))
+print(adjsourcestring)
+
+onlyfiles = [f for f in listdir(r"C:\Users\tony\Desktop\gun_dataset\img_pis") if isfile(join(r"C:\Users\tony\Desktop\gun_dataset\img_pis", f))]
 #print(onlyfiles)
 for f in onlyfiles:
-    img = cv2.imread(r"C:\Users\tony\Desktop\gun_dataset\img_rev\\"+f)
+    img = cv2.imread(r"C:\Users\tony\Desktop\gun_dataset\img_pis\\"+f)
     ht, wd, cc= img.shape
     ww = 250
     hh = 250
@@ -18,4 +26,4 @@ for f in onlyfiles:
     #cv2.imshow("result", result)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
-    cv2.imwrite(r"C:\Users\tony\Desktop\gun_dataset\img_adj_rev\\"+f, result)
+    cv2.imwrite(r"C:\Users\tony\Desktop\gun_dataset\img_adj_pis\\"+f, result)
